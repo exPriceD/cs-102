@@ -1,3 +1,6 @@
+import string
+
+
 def encrypt_caesar(plaintext: str, shift: int = 3) -> str:
     """
     Encrypts plaintext using a Caesar cipher.
@@ -11,7 +14,15 @@ def encrypt_caesar(plaintext: str, shift: int = 3) -> str:
     ''
     """
     ciphertext = ""
-    # PUT YOUR CODE HERE
+    alphabet = string.ascii_lowercase
+    for letter in plaintext:
+        if letter.lower() not in alphabet or letter == ' ':
+            ciphertext += letter
+            continue
+        if letter.islower():
+            ciphertext += chr((ord(letter) + shift - 97) % 26 + 97)
+        else:
+            ciphertext += chr((ord(letter) + shift - 65) % 26 + 65)
     return ciphertext
 
 
@@ -28,5 +39,15 @@ def decrypt_caesar(ciphertext: str, shift: int = 3) -> str:
     ''
     """
     plaintext = ""
-    # PUT YOUR CODE HERE
+    alphabet = string.ascii_lowercase
+    for letter in ciphertext:
+        if letter.lower() not in alphabet or letter == ' ':
+            plaintext += letter
+            continue
+        if letter.islower():
+            plaintext += chr((ord(letter) - shift - 97) % 26 + 97)
+        else:
+            plaintext += chr((ord(letter) - shift - 65) % 26 + 65)
     return plaintext
+
+# python -m doctest -v src/lab2/caesar.py
