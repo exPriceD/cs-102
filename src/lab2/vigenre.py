@@ -1,4 +1,6 @@
 import string
+
+
 def encrypt_vigenere(plaintext: str, keyword: str) -> str:
     """
     Encrypts plaintext using a Vigenere cipher.
@@ -38,8 +40,12 @@ def decrypt_vigenere(ciphertext: str, keyword: str) -> str:
         if ciphertext[i].lower() not in alphabet or ciphertext[i] == ' ':
             plaintext += ciphertext[i]
             continue
-        if ciphertext[i].islower():
-            plaintext += chr(((ord(ciphertext[i]) - (ord(keyword[i % len(keyword)]) - 97) % 26) - 97) % 26 + 97)
+        if keyword[i % len(keyword)].islower():
+            exp = (ord(keyword[i % len(keyword)]) - 97)
         else:
-            plaintext += chr(((ord(ciphertext[i]) - (ord(keyword[i % len(keyword)]) - 65) % 26) - 65) % 26 + 65)
+            exp = (ord(keyword[i % len(keyword)]) - 65)
+        if ciphertext[i % len(keyword)].islower():
+            plaintext += chr(((ord(ciphertext[i]) - exp % 26) - 97) % 26 + 97)
+        else:
+            plaintext += chr(((ord(ciphertext[i]) - exp % 26) - 65) % 26 + 65)
     return plaintext
