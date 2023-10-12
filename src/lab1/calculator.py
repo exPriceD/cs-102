@@ -25,7 +25,7 @@ def calculator(expression: str) -> Union[int, float, str]:
 
 # Comment out the code below before unit tests
 
-"""print("Welcome to the best calculator! If you want to use trigonometric "
+print("Welcome to the best calculator! If you want to use trigonometric "
       "functions and enter angles in radians, then use radians(x), where x is your angle. "
       "For example sin(radians(45)), tg(radians(90))")
 while True:
@@ -33,4 +33,4 @@ while True:
     if received_expression == "-1":
         print("The work is completed")
         break
-    print(calculator(received_expression))"""
+    print(calculator(received_expression))
