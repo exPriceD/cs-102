@@ -13,14 +13,19 @@ def encrypt_vigenere(plaintext: str, keyword: str) -> str:
     """
     ciphertext = ""
     alphabet = string.ascii_lowercase
+    space_count = 0
     for i in range(len(plaintext)):
-        if plaintext[i].lower() not in alphabet or plaintext[i] == ' ':
+        if plaintext[i] == ' ':
+            space_count += 1
+        if plaintext[i].lower() not in alphabet:
             ciphertext += plaintext[i]
             continue
         if plaintext[i].islower():
-            ciphertext += chr(((ord(plaintext[i]) + (ord(keyword[i % len(keyword)].lower()) - 97) - 97) % 26) + 97)
+            shift = (ord(keyword[(i - space_count) % len(keyword)].lower()) - 97)
+            ciphertext += chr(((ord(plaintext[i]) + shift - 97) % 26) + 97)
         else:
-            ciphertext += chr(((ord(plaintext[i]) + (ord(keyword[i % len(keyword)].upper()) - 65) - 65) % 26) + 65)
+            shift = (ord(keyword[(i - space_count) % len(keyword)].upper()) - 65)
+            ciphertext += chr(((ord(plaintext[i]) + shift - 65) % 26) + 65)
     return ciphertext
 
 
@@ -36,12 +41,17 @@ def decrypt_vigenere(ciphertext: str, keyword: str) -> str:
     """
     plaintext = ""
     alphabet = string.ascii_lowercase
+    space_count = 0
     for i in range(len(ciphertext)):
-        if ciphertext[i].lower() not in alphabet or ciphertext[i] == ' ':
+        if ciphertext[i] == ' ':
+            space_count += 1
+        if ciphertext[i].lower() not in alphabet:
             plaintext += ciphertext[i]
             continue
         if ciphertext[i].islower():
-            plaintext += chr(((ord(ciphertext[i]) - (ord(keyword[i % len(keyword)].lower()) - 97) - 97) % 26) + 97)
+            shift = (ord(keyword[(i - space_count) % len(keyword)].lower()) - 97)
+            plaintext += chr(((ord(ciphertext[i]) - shift - 97) % 26) + 97)
         else:
-            plaintext += chr(((ord(ciphertext[i]) - (ord(keyword[i % len(keyword)].upper()) - 65) - 65) % 26) + 65)
+            shift = (ord(keyword[(i - space_count) % len(keyword)].upper()) - 65)
+            plaintext += chr(((ord(ciphertext[i]) - shift - 65) % 26) + 65)
     return plaintext
