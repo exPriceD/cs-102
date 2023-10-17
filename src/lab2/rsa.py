@@ -88,7 +88,7 @@ def decrypt(pk: tp.Tuple[int, int], ciphertext: tp.List[int]) -> str:
 
 if __name__ == "__main__":
     print("RSA Encrypter/ Decrypter")
-    p = int(input("Enter a prime number (17, 19, 23, etc): "))
+    p = int(input("Enter a prime number (17, 19, 23, 41, etc): "))
     q = int(input("Enter another prime number (Not one you entered above): "))
     print("Generating your public/private keypairs now . . .")
     public, private = generate_keypair(p, q)
