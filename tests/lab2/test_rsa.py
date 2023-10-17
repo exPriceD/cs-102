@@ -36,6 +36,10 @@ class RSATestCase(unittest.TestCase):
             generate_keypair(11, 11)
             self.assertEqual(str(exc.exception), "p and q cannot be equal")
 
+        self.assertEqual(type(()), type(generate_keypair(17, 19)))  # type
+        self.assertEqual(2, len(generate_keypair(41, 59)))  # length
+        generated_keypair = generate_keypair(127, 151)
+        self.assertTrue(all(isinstance(key, int) for keys in generated_keypair for key in keys))  # type elem. in tuple
         print("Test 'generate_keypair_errors' completed")
 
     def test_encrypt_and_decrypt(self):
@@ -44,8 +48,14 @@ class RSATestCase(unittest.TestCase):
             p = random.choice([17, 19, 23, 37, 41, 59, 73, 157])
             q = random.choice([13, 29, 89, 97, 101, 127, 151, 181])
             public, private = generate_keypair(p, q)
+
             encrypted_msg = encrypt(private, message)
-            self.assertEqual(decrypt(public, encrypted_msg), message)
+            self.assertTrue(isinstance(encrypted_msg, list))
+            self.assertTrue(all(isinstance(element, int) for element in encrypted_msg))
+
+            decrypted_msg = decrypt(public, encrypted_msg)
+            self.assertTrue(isinstance(decrypted_msg, str))
+            self.assertEqual(decrypted_msg, message)
         print("Test 'encrypt_and_decrypt' completed")
 
 
