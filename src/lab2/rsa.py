@@ -64,7 +64,7 @@ def generate_keypair(p: int, q: int) -> tp.Tuple[tp.Tuple[int, int], tp.Tuple[in
 
     # Return public and private keypair
     # Public key is (e, n) and private key is (d, n)
-    return (e, n), (d, n)
+    return ((e, n), (d, n))
 
 
 def encrypt(pk: tp.Tuple[int, int], plaintext: str) -> tp.List[int]:
@@ -92,6 +92,7 @@ if __name__ == "__main__":
     q = int(input("Enter another prime number (Not one you entered above): "))
     print("Generating your public/private keypairs now . . .")
     public, private = generate_keypair(p, q)
+    print(public, private)
     print("Your public key is ", public, " and your private key is ", private)
     message = input("Enter a message to encrypt with your private key: ")
     encrypted_msg = encrypt(private, message)
