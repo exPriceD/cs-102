@@ -92,6 +92,7 @@ if __name__ == "__main__":
     q = int(input("Enter another prime number (Not one you entered above): "))
     print("Generating your public/private keypairs now . . .")
     public, private = generate_keypair(p, q)
+    print(public, private)
     print("Your public key is ", public, " and your private key is ", private)
     message = input("Enter a message to encrypt with your private key: ")
     encrypted_msg = encrypt(private, message)
