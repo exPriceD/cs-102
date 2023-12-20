@@ -1,4 +1,6 @@
 import unittest
+import random
+import string
 
 from src.lab2.vigenre import encrypt_vigenere, decrypt_vigenere
 
@@ -53,6 +55,13 @@ class VigenreTestCase(unittest.TestCase):
         result = decrypt_vigenere("yhsmxnoplfg3.12", "qwerty")
         self.assertEquals(result, "ilovepython3.12")
         print("Test 'decrypt_caesar_with_numbers' completed")
+
+    def test_randomized(self):
+        kwlen = random.randint(4, 24)
+        keyword = ''.join(random.choice(string.ascii_letters) for _ in range(kwlen))
+        plaintext = ''.join(random.choice(string.ascii_letters + ' -,') for _ in range(64))
+        ciphertext = encrypt_vigenere(plaintext, keyword)
+        self.assertEqual(plaintext, decrypt_vigenere(ciphertext, keyword))
 
 
 if __name__ == "__name__":
