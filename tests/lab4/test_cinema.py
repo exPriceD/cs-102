@@ -1,11 +1,11 @@
 import unittest
 from src.lab4.task1.cinema import MovieRecommendationSystem
-
+import os
 
 class TestMovieRecommendationSystem(unittest.TestCase):
     def setUp(self):
-        self.movies_path = 'data/movies.txt'
-        self.history_path = 'data/history.txt'
+        self.movies_path = f'{os.getcwd()}/data/movies.txt'
+        self.history_path = f'{os.getcwd()}/data/history.txt'
 
     def test_read_history(self):
         system = MovieRecommendationSystem(self.movies_path, self.history_path)
