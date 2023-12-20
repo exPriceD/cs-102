@@ -3,19 +3,21 @@ from typing import List, Dict, Set
 
 class MovieRecommendationSystem:
     def __init__(self, movies_path: str, history_path: str):
-        self.history = self.read_history(history_path)
-        self.movies = self.read_movies(movies_path)
+        self.history = [['1', '2', '3'], ['4', '5', '6']]
+        self.movies = {'1': 'Мстители: Финал', '2': 'Хатико', '3': 'Дюна'}
 
     def read_history(self, path: str) -> List:
         """ This function return all history of other users from file """
         with open(path, 'r', encoding='UTF-8') as history_file:
-            return [ user.split(',') for user in history_file.read().splitlines() ]
+            print([user.split(',') for user in history_file.read().splitlines()])
+            return [user.split(',') for user in history_file.read().splitlines()]
 
     def read_movies(self, path: str) -> Dict:
         """ This function return all movies """
         with open(path, 'r', encoding='UTF-8') as movies_file:
             result = [ movie.split(',') for movie in movies_file.read().splitlines() ]
             result = { movie[0]:movie[1] for movie in result }
+            print(result)
         return result
 
     def get_views(self, movies: Set) -> Dict[str,int]:

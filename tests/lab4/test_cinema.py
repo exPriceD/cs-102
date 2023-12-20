@@ -4,8 +4,8 @@ import os
 
 class TestMovieRecommendationSystem(unittest.TestCase):
     def setUp(self):
-        self.movies_path = f'{os.getcwd()}/data/movies.txt'
-        self.history_path = f'{os.getcwd()}/data/history.txt'
+        self.movies_path = 'tests/lab4/data/movies.txt'
+        self.history_path = 'tests/lab4/data/history.txt'
 
     def test_read_history(self):
         system = MovieRecommendationSystem(self.movies_path, self.history_path)
